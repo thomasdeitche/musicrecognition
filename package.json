@@ -1,0 +1,15 @@
+{
+  "name": "musicrecognition",
+  "version": "1.0.0",
+  "description": "Live-Songerkennung mit Release-Alter",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "GPL-2.0",
+  "type": "commonjs",
+  "dependencies": {
+    "shazam-api": "^0.3.0"
+  },
+  "private": true
+}

@@ -1,0 +1,139 @@
+:root {
+  --bg: #000;
+  --card: #000;
+  --fg: #fff;
+  --muted: #9a9aa2;
+  --accent: #3ddc84;
+  --warn: #f5a623;
+  --err: #ff5c5c;
+  --ctl: #2a2a30;
+  --ctl-border: #3a3a42;
+  font-family: "Segoe UI", "Open Sans", system-ui, sans-serif;
+}
+
+[hidden] { display: none !important; }
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; min-height: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  display: flex;
+  justify-content: center;
+  padding: 8vh 16px 32px;
+}
+
+main { width: 100%; max-width: 860px; }
+
+/* ---------- Karte (wie Vorlage) ---------- */
+.card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 26px 34px 28px;
+  text-transform: uppercase;
+  transition: opacity .4s;
+}
+.card.stale { opacity: .55; }
+
+/* Je eine feste Zeile – zu lange Texte werden mit "…" gekürzt, die Kartenhöhe bleibt gleich */
+.song, .released {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.song {
+  font-weight: 300;
+  font-size: clamp(24px, 4.6vw, 38px);
+  line-height: 1.2;
+}
+#title { margin-bottom: 10px; }
+
+.released {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.card.flash { animation: flash .8s ease-out; }
+@keyframes flash {
+  from { box-shadow: 0 0 0 3px var(--accent); }
+  to   { box-shadow: 0 0 0 3px transparent; }
+}
+
+/* ---------- Status ---------- */
+.status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 4px 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #555;
+  flex: none;
+}
+.dot.listening { background: var(--accent); animation: pulse 1.4s infinite; }
+.dot.busy { background: var(--warn); animation: pulse .7s infinite; }
+.dot.error { background: var(--err); }
+@keyframes pulse { 50% { opacity: .3; } }
+
+.meter {
+  margin-left: auto;
+  width: 120px; height: 6px;
+  background: var(--ctl);
+  border-radius: 3px;
+  overflow: hidden;
+  flex: none;
+}
+.meter span {
+  display: block; height: 100%; width: 0;
+  background: var(--accent);
+  transition: width .1s linear;
+}
+
+/* ---------- Bedienung ---------- */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+select, button {
+  font: inherit;
+  font-size: 14px;
+  color: var(--fg);
+  background: var(--ctl);
+  border: 1px solid var(--ctl-border);
+  border-radius: 8px;
+  padding: 8px 14px;
+}
+select { flex: 1 1 260px; min-width: 0; }
+button { cursor: pointer; }
+button:hover { border-color: #5a5a64; }
+button.primary { background: #fff; color: #000; border-color: #fff; font-weight: 600; }
+button.primary.stop { background: var(--err); border-color: var(--err); color: #fff; }
+button:disabled { opacity: .5; cursor: default; }
+
+/* ---------- Verlauf ---------- */
+.history { margin-top: 32px; }
+.history h2 {
+  font-size: 13px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted);
+  margin: 0 0 8px 4px;
+}
+.history ol { list-style: none; margin: 0; padding: 0; }
+.history li {
+  display: flex; gap: 12px; align-items: baseline;
+  padding: 8px 4px;
+  border-top: 1px solid #2a2a30;
+  font-size: 14px;
+}
+.history .time { color: var(--muted); font-variant-numeric: tabular-nums; flex: none; }
+.history .what { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.history .year { color: var(--muted); flex: none; }

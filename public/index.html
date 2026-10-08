@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Musikerkennung</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <section class="card" id="card" aria-live="polite">
+      <div class="song" id="artist">BEREIT</div>
+      <div class="song" id="title">&nbsp;</div>
+      <div class="released" id="released">RELEASED: –</div>
+    </section>
+
+    <div class="status">
+      <span class="dot" id="dot"></span>
+      <span id="statusText">Gestoppt – Quelle wählen und „Start“ drücken</span>
+      <span class="meter" aria-hidden="true"><span id="meterFill"></span></span>
+    </div>
+
+    <div class="controls">
+      <select id="device" title="Audioquelle">
+        <option value="">Standard-Mikrofon</option>
+      </select>
+      <button id="startBtn" class="primary">Start</button>
+      <button id="systemBtn" title="Ton eines Tabs/Systems aufnehmen (nur Chrome/Edge)">Systemaudio</button>
+    </div>
+
+    <section class="history" id="historyBox" hidden>
+      <h2>Verlauf</h2>
+      <ol id="history"></ol>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
